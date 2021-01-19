@@ -6,12 +6,13 @@
 
 bool checkNumber(char sym) {
     if (sym == '0' || sym == '1' || sym == '2'
-       or sym == '3' || sym == '4' || sym == '5'
-       or sym == '6' || sym == '7' || sym == '8'
-       or sym == '9') {
+       || sym == '3' || sym == '4' || sym == '5'
+       || sym == '6' || sym == '7' || sym == '8'
+       || sym == '9') {
         return true;
-    } else
+    } else {
         return false;
+    }
 }
 
 int getPowerOfOperation(char sym) {
@@ -19,10 +20,11 @@ int getPowerOfOperation(char sym) {
         return 0;
     } else if (sym == '+' || sym == '-') {
         return 1;
-    } else if (sym == '/' || sym == '*')
+    } else if (sym == '/' || sym == '*') {
         return 2;
-    else
+    } else {
         return 3;
+    }
 }
 
 int isBracketOpen(char sym) {
@@ -41,7 +43,7 @@ std::string getNumber(std::string s, int i) {
     std::string y;
     int count = 0;
     for (int j = i+2; j <= s.length(); j++) {
-        if(!checkNumber(s[j])){
+        if (!checkNumber(s[j])) {
             count = j - i;
             break;
         }
@@ -50,7 +52,7 @@ std::string getNumber(std::string s, int i) {
     return y;
 }
 
-std::string infix2postfix(std::string s){
+std::string infix2postfix(std::string s) {
     std::stack<std::string> st_digit;
     std::stack<char> st_operation;
     std::string x;
@@ -59,7 +61,7 @@ std::string infix2postfix(std::string s){
     for (int i = 0; i < s.length(); i++) {
         if (checkNumber(s[i])) {
             if ((i + 1 < s.length()) && (s[i+1] == '.')) {
-                x = getNumber(s,i);
+                x = getNumber(s, i);
                 st_digit.push(x);
                 i+=x.length()-1;
             } else {
@@ -70,22 +72,23 @@ std::string infix2postfix(std::string s){
             if (st_operation.empty()) {
                 st_operation.push(s[i]);
             } else {
-                if (getPowerOfOperation(s[i]) > getPowerOfOperation(st_operation.top()) || isBracketOpen(s[i])) {
+                if (getPowerOfOperation(s[i]) > getPowerOfOperation(st_operation.top())
+                    || isBracketOpen(s[i])) {
                     st_operation.push(s[i]);
                 } else if (isBracketClose(s[i])) {
                     while (st_operation.top() != '(') {
                         if (!st_digit.empty()) {
                             y = st_digit.top();
-                            y+=' ';
+                            y += ' ';
                             st_digit.pop();
                         }
                         if (!st_digit.empty()) {
-                            answer+=st_digit.top();
-                            answer+=' ';
+                            answer += st_digit.top();
+                            answer += ' ';
                             st_digit.pop();
                         }
-                        answer+=y;
-                        answer+=st_operation.top();
+                        answer += y;
+                        answer += st_operation.top();
                         st_digit.push(answer);
                         answer = "";
                         st_operation.pop();
@@ -94,43 +97,43 @@ std::string infix2postfix(std::string s){
                 } else {
                     if (!st_digit.empty()) {
                         y = st_digit.top();
-                        y+=' ';
+                        y += ' ';
                         st_digit.pop();
                     }
                     if (!st_digit.empty()) {
-                        answer+=st_digit.top();
-                        answer+=' ';
+                        answer += st_digit.top();
+                        answer += ' ';
                         st_digit.pop();
                     }
-                    answer+=y;
-                    answer+=st_operation.top();
+                    answer += y;
+                    answer += st_operation.top();
                     st_digit.push(answer);
                     answer = "";
                     st_operation.pop();
-                    i-=1;
+                    i -= 1;
                 }
             }
         }
     }
-    
+
     std::stack<std::string> st_digit1;
     while (!st_digit.empty()) {
         st_digit1.push(st_digit.top());
         st_digit.pop();
     }
-    
+
     while (!st_digit1.empty()) {
         answer += st_digit1.top();
         answer += " ";
         st_digit1.pop();
     }
-    
+
     while (!st_operation.empty()) {
         answer += st_operation.top();
         answer += " ";
         st_operation.pop();
     }
-    
-    answer.erase(answer.length()-1,1);
+
+    answer.erase(answer.length()-1, 1);
     return answer;
 }
