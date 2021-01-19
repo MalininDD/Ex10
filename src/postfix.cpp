@@ -72,7 +72,7 @@ std::string infix2postfix(std::string s) {
             if (st_operation.empty()) {
                 st_operation.push(s[i]);
             } else {
-                if (getPowerOfOperation(s[i]) 
+                if (getPowerOfOperation(s[i])
                     > getPowerOfOperation(st_operation.top())
                     || isBracketOpen(s[i])) {
                     st_operation.push(s[i]);
