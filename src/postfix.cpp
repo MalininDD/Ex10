@@ -131,6 +131,6 @@ std::string infix2postfix(std::string s){
         st_operation.pop();
     }
     
-    answer[answer.length()-1] = '\0';
+    answer.erase(answer.length()-1,1);
     return answer;
 }
