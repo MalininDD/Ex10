@@ -5,6 +5,6 @@
 #ifndef postfix_h
 #define postfix_h
 
-std::string infix2prefix(std::string s);
+std::string infix2postfix(std::string s);
 
 #endif /* postfix_h */
