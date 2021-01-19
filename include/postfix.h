@@ -2,9 +2,9 @@
 #include <iostream>
 #include <string>
 
-#ifndef postfix_h
-#define postfix_h
+#ifndef INCLUDE_POSTFIX_H_
+#define INCLUDE_POSTFIX_H_
 
 std::string infix2postfix(std::string s);
 
-#endif /* postfix_h */
+#endif  // INCLUDE_POSTFIX_H_
