@@ -5,39 +5,39 @@
 #include <sstream>
 
 bool checkNumber(char sym) {
-    if(sym == '0' or sym == '1' or sym == '2' or sym == '3' or sym == '4' or sym == '5' or sym == '6' or sym == '7' or sym == '8' or sym == '9'){
+    if (sym == '0' || sym == '1' || sym == '2'
+       or sym == '3' || sym == '4' || sym == '5'
+       or sym == '6' || sym == '7' || sym == '8'
+       or sym == '9') {
         return true;
-    }
-    else
+    } else
         return false;
 }
 
 int getPowerOfOperation(char sym) {
-    if (sym == '(' or sym == ')') {
+    if (sym == '(' || sym == ')') {
         return 0;
-    }
-    else if (sym == '+' or sym == '-'){
+    } else if (sym == '+' || sym == '-') {
         return 1;
-    }
-    else if (sym == '/' or sym == '*')
+    } else if (sym == '/' || sym == '*')
         return 2;
     else
         return 3;
 }
 
 int isBracketOpen(char sym) {
-    if(sym == '(')
+    if (sym == '(')
         return 1;
     return 0;
 }
 
 int isBracketClose(char sym) {
-    if(sym == ')')
+    if (sym == ')')
         return 1;
     return 0;
 }
 
-std::string getNumber(std::string s,int i) {
+std::string getNumber(std::string s, int i) {
     std::string y;
     int count = 0;
     for (int j = i+2; j <= s.length(); j++) {
@@ -58,7 +58,7 @@ std::string infix2postfix(std::string s){
     std::string answer = "";
     for (int i = 0; i < s.length(); i++) {
         if (checkNumber(s[i])) {
-            if((i + 1 < s.length()) and (s[i+1] == '.')){
+            if ((i + 1 < s.length()) && (s[i+1] == '.')) {
                 x = getNumber(s,i);
                 st_digit.push(x);
                 i+=x.length()-1;
@@ -67,19 +67,19 @@ std::string infix2postfix(std::string s){
                 st_digit.push(x);
             }
         } else if (s[i] != ' ') {
-            if(st_operation.empty()){
+            if (st_operation.empty()) {
                 st_operation.push(s[i]);
             } else {
-                if(getPowerOfOperation(s[i]) > getPowerOfOperation(st_operation.top()) or isBracketOpen(s[i])){
+                if (getPowerOfOperation(s[i]) > getPowerOfOperation(st_operation.top()) || isBracketOpen(s[i])) {
                     st_operation.push(s[i]);
-                } else if(isBracketClose(s[i])) {
+                } else if (isBracketClose(s[i])) {
                     while (st_operation.top() != '(') {
-                        if(!st_digit.empty()) {
+                        if (!st_digit.empty()) {
                             y = st_digit.top();
                             y+=' ';
                             st_digit.pop();
                         }
-                        if(!st_digit.empty()) {
+                        if (!st_digit.empty()) {
                             answer+=st_digit.top();
                             answer+=' ';
                             st_digit.pop();
