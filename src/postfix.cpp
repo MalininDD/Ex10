@@ -50,7 +50,7 @@ std::string getNumber(std::string s,int i) {
     return y;
 }
 
-std::string infix2prefix(std::string s){
+std::string infix2postfix(std::string s){
     std::stack<std::string> st_digit;
     std::stack<char> st_operation;
     std::string x;
