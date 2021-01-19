@@ -1,7 +1,7 @@
 // Copyright 2021 MalininDmitry
 #include <iostream>
 #include <string>
-#include "postfix.h"
+#include "../include/postfix.h"
 
 int main() {
     std::string s1("9 + 5 * (3.14 - 6.17) * 7");
